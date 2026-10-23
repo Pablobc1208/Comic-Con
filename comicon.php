@@ -94,6 +94,8 @@ try {
             throw new Exception('La entrada VIP está restringida a mayores de edad');
         } else if ($edad >= 16 && $tipo === 'Infantil') {
             throw new Exception('La entrada Infantil está restringida a menores de 16 años');
+        } else if ($edad >= 105) {
+            throw new Exception('La edad no puede ser mayor de 105 años');
         }
         // Calcular y guardar resultado
         $resultado = procesarInscripcion($nombre, $edad, $tipo, $seleccionados, $talleres);
