@@ -16,6 +16,11 @@ $talleres = [
     'rol_en_vivo' => ['nombre' => 'Zona de Rol en Vivo', 'precio' => 5],
 ];
 
+function mostrarTexto(string $texto): string
+{
+    return htmlspecialchars($texto, ENT_QUOTES, 'UTF-8');
+}
+
 // Precio base según tipo de entrada
 function calcularPrecioBase(string $tipo): int
 {
@@ -70,7 +75,7 @@ try {
         $seleccionados = $_POST['talleres'] ?? [];
 
         // Sanear nombre 
-        $nombre = htmlspecialchars(trim($nombre), ENT_QUOTES, 'UTF-8');
+        $nombre = mostrarTexto(trim($nombre));
 
         // Validar nombre
         if ($nombre === '') {
@@ -124,7 +129,7 @@ try {
     <?php // Mensaje de error si lo hay
     if ($mensajeError !== ''): ?>
         <p style="color: red;">
-            <?= htmlspecialchars($mensajeError, ENT_QUOTES, 'UTF-8') ?>
+            <?= mostrarTexto($mensajeError) ?>
         </p>
     <?php endif; ?>
 
@@ -132,14 +137,13 @@ try {
 
         <div>
             <label for="nombre">Nombre completo:</label>
-            <input type="text" id="nombre" name="nombre" required
-                value="<?= htmlspecialchars($_POST['nombre'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+            <input type="text" id="nombre" name="nombre" required value="<?= mostrarTexto($_POST['nombre'] ?? '') ?>">
         </div>
 
         <div>
             <label for="edad">Edad:</label>
             <input type="number" id="edad" name="edad" min="1" step="1" required
-                value="<?= htmlspecialchars($_POST['edad'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                value="<?= mostrarTexto($_POST['edad'] ?? '') ?>">
         </div>
 
         <div>
@@ -150,8 +154,8 @@ try {
                 $opciones = ['General', 'VIP', 'Infantil'];
                 foreach ($opciones as $opcion):
                     ?>
-                    <option value="<?= htmlspecialchars($opcion, ENT_QUOTES, 'UTF-8') ?>" <?= $tipoSeleccionado === $opcion ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($opcion, ENT_QUOTES, 'UTF-8') ?>
+                    <option value="<?= mostrarTexto($opcion) ?>" <?= $tipoSeleccionado === $opcion ? 'selected' : '' ?>>
+                        <?= mostrarTexto($opcion) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -165,10 +169,10 @@ try {
             foreach ($talleres as $clave => $info):
                 ?>
                 <div>
-                    <input type="checkbox" id="taller_<?= htmlspecialchars($clave, ENT_QUOTES, 'UTF-8') ?>"
-                        name="talleres[]" value="<?= htmlspecialchars($clave, ENT_QUOTES, 'UTF-8') ?>" <?= in_array($clave, $talleresSeleccionados, true) ? 'checked' : '' ?>>
-                    <label for="taller_<?= htmlspecialchars($clave, ENT_QUOTES, 'UTF-8') ?>">
-                        <?= htmlspecialchars($info['nombre'], ENT_QUOTES, 'UTF-8') ?>
+                    <input type="checkbox" id="taller_<?= mostrarTexto($clave) ?>" name="talleres[]"
+                        value="<?= mostrarTexto($clave) ?>" <?= in_array($clave, $talleresSeleccionados, true) ? 'checked' : '' ?>>
+                    <label for="taller_<?= mostrarTexto($clave) ?>">
+                        <?= mostrarTexto($info['nombre']) ?>
                         (<?= $info['precio'] ?> €)
                     </label>
                 </div>
@@ -190,7 +194,7 @@ try {
             </p>
             <p>
                 <strong>Entrada:</strong>
-                <?= htmlspecialchars($resultado['tipo'], ENT_QUOTES, 'UTF-8') ?>
+                <?= mostrarTexto($resultado['tipo']) ?>
                 (
                 <?= $resultado['precioBase'] ?> €)
             </p>
@@ -200,7 +204,7 @@ try {
                 <ul>
                     <?php foreach ($resultado['talleres'] as $taller): ?>
                         <li>
-                            <?= htmlspecialchars($taller['nombre'], ENT_QUOTES, 'UTF-8') ?>:
+                            <?= mostrarTexto($taller['nombre']) ?>:
                             <?= $taller['precio'] ?> €
                         </li>
                     <?php endforeach; ?>
