@@ -121,6 +121,63 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comic-Con — Inscripción</title>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 500px;
+        margin: 30px auto;
+        padding: 0 15px;
+        background: #f4f4f4;
+        color: #222;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    form,
+    section {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    form div {
+        margin-bottom: 12px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    fieldset label {
+        display: inline;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #6a1b9a;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #4a148c;
+    }
+</style>
 
 <body>
 
